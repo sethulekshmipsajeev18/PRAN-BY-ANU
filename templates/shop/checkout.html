@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Checkout - Pran By Anu</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f5f2;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 22px 8%;
+            border-bottom: 1px solid #eee;
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .checkout-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .checkout-title h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .checkout-title p {
+            color: #777;
+        }
+
+        .checkout-box {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 21px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .saved-detail {
+            background: #f8f7f5;
+            padding: 14px;
+            border-radius: 8px;
+            color: #444;
+            min-height: 45px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-name {
+            font-weight: 600;
+        }
+
+        .product-price {
+            color: #555;
+        }
+
+        .total-box {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f5f8fa;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total-label {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .total-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #3399cc;
+        }
+
+        .pay-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: none;
+            border-radius: 9px;
+            background: #3399cc;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .pay-button:hover {
+            background: #287aa3;
+        }
+
+        .secure {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .success-details {
+            background: #f8f7f5;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .success-details p {
+            margin: 12px 0;
+        }
+
+        .success-details strong {
+            display: inline-block;
+            width: 90px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+
+            .checkout-box {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                margin-top: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="header">
+
+    <div class="brand">
+        Pran By Anu
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="checkout-title">
+
+        <h1>Checkout</h1>
+
+        {% if razorpay_order_id %}
+            <p>Review your details and complete your payment</p>
+        {% else %}
+            <p>Enter your details to continue</p>
+        {% endif %}
+
+    </div>
+
+
+    {% if products %}
+
+    <div class="checkout-box">
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="card">
+
+            {% if razorpay_order_id %}
+
+                <!-- AFTER FORM SUBMISSION -->
+
+                <h2>Your Details</h2>
+
+                <div class="success-details">
+
+                    <p>
+                        <strong>Name:</strong>
+                        {{ name }}
+                    </p>
+
+                    <p>
+                        <strong>Address:</strong>
+                        {{ address }}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        {{ email }}
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        {{ phone }}
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="rzp-button"
+                    class="pay-button">
+
+                    PAY ₹{{ total }} WITH RAZORPAY
+
+                </button>
+
+
+                <div class="secure">
+                    🔒 Secure payment powered by Razorpay
+                </div>
+
+
+            {% else %}
+
+                <!-- FIRST TIME CHECKOUT -->
+
+                <h2>Customer Details</h2>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Address</label>
+
+                        <input
+                            type="text"
+                            name="address"
+                            placeholder="Enter your address"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Phone Number</label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            required>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="pay-button">
+
+                        CONTINUE TO PAYMENT →
+
+                    </button>
+
+                </form>
+
+                <div class="secure">
+                    🔒 Secure payment powered by Razorpay
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="card">
+
+            <h2>Order Summary</h2>
+
+            {% for product in products %}
+
+                <div class="product">
+
+                    <span class="product-name">
+                        {{ product.name }}
+                        × {{ product.quantity }}
+                    </span>
+
+                    <span class="product-price">
+                        ₹{{ product.subtotal }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+
+            <div class="total-box">
+
+                <span class="total-label">
+                    Total
+                </span>
+
+                <span class="total-price">
+                    ₹{{ total }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+        <div class="empty-cart">
+
+            <h2>Your cart is empty</h2>
+
+            <p>
+                Add some beautiful pieces to your cart first.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- RAZORPAY -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+{% if razorpay_order_id %}
+
+document.getElementById('rzp-button').addEventListener('click', function(e) {
+
+    e.preventDefault();
+
+    var options = {
+
+        "key": "{{ razorpay_key }}",
+
+        "amount": "{{ amount }}",
+
+        "currency": "INR",
+
+        "name": "Pran By Anu",
+
+        "description": "Order Payment",
+
+        "order_id": "{{ razorpay_order_id }}",
+
+        "handler": function(response) {
+
+            let name = "{{ name|escapejs }}";
+
+            let address = "{{ address|escapejs }}";
+
+            let email = "{{ email|escapejs }}";
+
+            let phone = "{{ phone|escapejs }}";
+
+            let total = "{{ total }}";
+
+            let payment_id =
+                response.razorpay_payment_id;
+
+
+            window.location.href =
+                `/thankyou/?name=${encodeURIComponent(name)}` +
+                `&address=${encodeURIComponent(address)}` +
+                `&email=${encodeURIComponent(email)}` +
+                `&phone=${encodeURIComponent(phone)}` +
+                `&total=${encodeURIComponent(total)}` +
+                `&payment_id=${encodeURIComponent(payment_id)}`;
+
+        },
+
+        "theme": {
+            "color": "#3399cc"
+        }
+
+    };
+
+
+    var rzp1 = new Razorpay(options);
+
+    rzp1.open();
+
+});
+
+{% endif %}
+
+</script>
+
+
+</body>
+</html>

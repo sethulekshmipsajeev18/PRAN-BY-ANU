@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.name }} - Pran By Anu</title>
+    <style>
+        body { font-family: Arial; background: #f8f8f8; padding: 30px; }
+        h1 { text-align: center; color: #d63384; }
+        .grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .card { background: white; padding: 20px; border-radius: 12px; width: 250px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card img { width: 100%; border-radius: 8px; }
+        .price { font-size: 22px; color: #d63384; font-weight: bold; }
+        .btn { background: #d63384; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>{{ category.name }}</h1> 
+
+    <div class="grid">
+    {% for product in products %}
+        <div class="card">
+            <a href="{% url 'product_detail' product.pk %}">
+                <img src="{{ product.image.url }}">
+                <h3>{{ product.name }}</h3>
+            </a>
+            <p class="price">₹{{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.pk %}" class="btn">Add to Cart</a>
+        </div>
+    {% empty %}
+        <p>No products in this category yet.</p>
+    {% endfor %}
+    </div>
+</body>
+</html>

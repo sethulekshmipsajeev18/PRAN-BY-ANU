@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart | Pran By Anu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #faf7f5;
+            color: #222;
+        }
+
+        /* HEADER */
+        .navbar {
+            background: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #222;
+            margin-left: 25px;
+            font-size: 14px;
+        }
+
+        /* PAGE */
+        .cart-page {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .cart-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .cart-title p {
+            letter-spacing: 3px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .cart-title h1 {
+            font-size: 38px;
+            margin: 10px 0;
+        }
+
+        /* LAYOUT */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 35px;
+        }
+
+        /* PRODUCT */
+        .cart-item {
+            background: white;
+            padding: 20px;
+            display: flex;
+            gap: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 150px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details h2 {
+            margin-top: 5px;
+            font-size: 21px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .quantity {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* REMOVE */
+        .remove-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #b44;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #b44;
+        }
+
+        .remove-button:hover {
+            color: #e00000;
+        }
+
+        /* SUMMARY */
+        .summary {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            height: fit-content;
+            border: 1px solid #eee;
+        }
+
+        .summary h2 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 18px 0;
+            color: #555;
+        }
+
+        .total-row {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .checkout-button {
+            display: block;
+            text-align: center;
+            background: #222;
+            color: white;
+            padding: 15px;
+            margin-top: 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .checkout-button:hover {
+            background: #444;
+        }
+
+        /* CONTINUE SHOPPING */
+        .continue-shopping {
+            display: inline-block;
+            margin-top: 25px;
+            color: #222;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* EMPTY CART */
+        .empty-cart {
+            background: white;
+            padding: 70px 20px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .empty-cart h2 {
+            font-size: 28px;
+        }
+
+        .shop-now {
+            display: inline-block;
+            margin-top: 20px;
+            background: #222;
+            color: white;
+            padding: 13px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 750px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item img {
+                width: 110px;
+                height: 140px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="logo">
+        Pran By Anu
+    </div>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'cart' %}">Cart</a>
+    </nav>
+
+</header>
+
+
+<div class="cart-page">
+
+    <div class="cart-title">
+
+        <p>PRAN BY ANU</p>
+
+        <h1>Your Shopping Bag</h1>
+
+        <p>Your selected pieces, ready for you.</p>
+
+    </div>
+
+
+    {% if cart_items %}
+
+    <div class="cart-layout">
+
+        <!-- CART PRODUCTS -->
+        <div>
+
+            {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <img src="{{ item.product.image.url }}"
+                     alt="{{ item.product.name }}">
+
+                <div class="item-details">
+
+                    <h2>{{ item.product.name }}</h2>
+
+                    <p class="price">
+                        ₹{{ item.product.price }}
+                    </p>
+
+                    <p class="quantity">
+                        Quantity: {{ item.quantity }}
+                    </p>
+
+                    <a href="{% url 'remove_from_cart' item.id %}"
+                       class="remove-button">
+                        Remove from cart
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+            <a href="{% url 'home' %}" class="continue-shopping">
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+        <div class="summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="summary-row">
+                <span>Items</span>
+                <span>{{ cart_items|length }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Delivery</span>
+                <span>FREE</span>
+            </div>
+
+            <div class="summary-row total-row">
+                <span>Total</span>
+                <span>₹{{ total }}</span>
+            </div>
+
+            <a href="{% url 'checkout' %}"
+               class="checkout-button">
+                PROCEED TO CHECKOUT →
+            </a>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY CART -->
+
+    <div class="empty-cart">
+
+        <h2>Your shopping bag is empty</h2>
+
+        <p>
+            Discover something beautiful from Pran By Anu.
+        </p>
+
+        <a href="{% url 'home' %}" class="shop-now">
+            SHOP NOW →
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

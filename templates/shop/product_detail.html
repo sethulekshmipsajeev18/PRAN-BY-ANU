@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <style>
+        body { font-family: Arial; padding: 40px; background: #f5f5f5; }
+        .wrap { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; display: flex; gap: 30px; }
+        img { width: 350px; height: 350px; object-fit: cover; border-radius: 10px; }
+        .price { font-size: 28px; color: #e91e63; font-weight: bold; }
+        .btn { padding: 12px 20px; margin: 5px; border-radius: 5px; text-decoration: none; display: inline-block; color: white; }
+        .btn-pink { background: #e91e63; }
+        .btn-green { background: #4CAF50; }
+        .btn-gray { background: #888; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    <div>
+        <h1>{{ product.name }}</h1>
+        <p class="price">₹{{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        
+        
+        <a href="{% url 'cart' %}" class="btn btn-green">View Cart</a>
+        <a href="{% url 'category' product.category.pk %}" class="btn btn-gray">Back to Category</a>
+    </div>
+    <form action="{% url 'add_to_cart' product.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-pink">Add to Cart</button>
+</form>
+</div>
+</body>
+</html>

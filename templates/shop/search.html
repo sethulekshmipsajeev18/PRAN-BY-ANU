@@ -1,0 +1,339 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Search | Pran By Anu</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{% static 'shop/style.css' %}">
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #f8f6f3;
+            color: #222;
+            font-family: Arial, sans-serif;
+        }
+
+        /* HEADER */
+
+        .search-header {
+            background: white;
+            border-bottom: 1px solid #eee;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-logo {
+            font-size: 23px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .search-nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        .search-nav a {
+            text-decoration: none;
+            color: #222;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-cart {
+            font-size: 21px;
+            text-decoration: none;
+        }
+
+
+        /* SEARCH TITLE */
+
+        .search-title {
+            text-align: center;
+            padding: 70px 20px 45px;
+        }
+
+        .search-title p {
+            font-size: 12px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .search-title h1 {
+            font-size: 42px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .search-title span {
+            color: #777;
+            font-size: 15px;
+            display: block;
+            margin-top: 15px;
+        }
+
+
+        /* PRODUCTS */
+
+        .search-products {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 30px 80px;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .search-product {
+            background: white;
+            text-decoration: none;
+            color: #222;
+            transition: 0.3s;
+        }
+
+        .search-product:hover {
+            transform: translateY(-5px);
+        }
+
+        .search-image {
+            width: 100%;
+            height: 390px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .search-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s;
+        }
+
+        .search-product:hover img {
+            transform: scale(1.03);
+        }
+
+        .search-info {
+            padding: 18px 18px 22px;
+        }
+
+        .search-info h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .search-info p {
+            margin: 0;
+            font-size: 15px;
+            color: #555;
+        }
+
+
+        /* NO RESULTS */
+
+        .no-results {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .no-results h2 {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .no-results p {
+            color: #777;
+        }
+
+        .no-results a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 13px 25px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .search-header {
+                padding: 18px 5%;
+            }
+
+            .search-nav {
+                display: none;
+            }
+
+            .search-title {
+                padding: 50px 20px 35px;
+            }
+
+            .search-title h1 {
+                font-size: 32px;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .search-image {
+                height: 300px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-image {
+                height: 400px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="search-header">
+
+    <div class="search-logo">
+        Pran By Anu
+    </div>
+
+    <nav class="search-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/shop/">Shop</a>
+
+        <a href="/about/">About</a>
+
+        <a href="/contact/">Contact</a>
+
+    </nav>
+
+    <a href="{% url 'cart' %}" class="search-cart">
+        🛍
+    </a>
+
+</header>
+
+
+<!-- TITLE -->
+
+<section class="search-title">
+
+    <p>PRAN BY ANU</p>
+
+    {% if query %}
+
+        <h1>Search Results</h1>
+
+        <span>
+            Showing results for "{{ query }}"
+        </span>
+
+    {% else %}
+
+        <h1>Our Collection</h1>
+
+        <span>
+            Discover something you love.
+        </span>
+
+    {% endif %}
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="search-products">
+
+    {% if products %}
+
+        <div class="search-grid">
+
+            {% for product in products %}
+
+                <a href="{% url 'product_detail' product.id %}"
+                   class="search-product">
+
+                    <div class="search-image">
+
+                        <img src="{{ product.image.url }}"
+                             alt="{{ product.name }}">
+
+                    </div>
+
+                    <div class="search-info">
+
+                        <h3>{{ product.name }}</h3>
+
+                        <p>₹{{ product.price }}</p>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% elif query %}
+
+        <div class="no-results">
+
+            <h2>No pieces found.</h2>
+
+            <p>
+                We couldn't find anything matching
+                "{{ query }}".
+            </p>
+
+            <a href="/">
+                CONTINUE SHOPPING
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+</body>
+</html>

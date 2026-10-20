@@ -1,0 +1,859 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #202020;
+    background: #f8f7f4;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+    height: 85px;
+    background: #f8f7f4;
+    color: #202020;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    border-bottom: 1px solid #deddd9;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 38px;
+    margin: 0;
+}
+
+.navbar nav a {
+    color: #202020;
+    font-size: 14px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar nav a:hover {
+    opacity: 0.5;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 18px;
+    font-size: 22px;
+}
+
+.nav-icons span {
+    cursor: pointer;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero-section {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 70px 7%;
+    background: #f8f7f4;
+    gap: 60px;
+}
+
+.hero-text {
+    width: 45%;
+}
+
+.small-title {
+    font-size: 12px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.hero-text h1 {
+    font-size: 72px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    margin: 0 0 30px;
+    font-weight: 500;
+}
+
+.hero-description {
+    max-width: 400px;
+    color: #666;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 35px;
+}
+
+.shop-button {
+    display: inline-block;
+    background: #202020;
+    color: white;
+    padding: 16px 27px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    transition: 0.3s;
+}
+
+.shop-button:hover {
+    background: #555;
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    width: 48%;
+    height: 540px;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.image-label {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    background: white;
+    padding: 13px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.image-label span {
+    font-size: 10px;
+    background: #202020;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 15px;
+    margin-right: 8px;
+}
+
+
+/* =========================
+   SECTION HEADINGS
+========================= */
+
+.category-section,
+.featured-section {
+    padding: 100px 7%;
+    background: white;
+}
+
+.section-heading {
+    margin-bottom: 45px;
+}
+
+.section-heading p {
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    color: #777;
+}
+
+.section-heading h2 {
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -2px;
+    margin: 0;
+}
+
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.category-card {
+    background: #f5f4f0;
+    border-radius: 22px;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+}
+
+.category-image {
+    height: 420px;
+    overflow: hidden;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.04);
+}
+
+.category-info {
+    padding: 25px;
+}
+
+.category-info h3 {
+    font-size: 24px;
+    margin: 0 0 8px;
+    font-weight: 500;
+}
+
+.category-info p {
+    color: #777;
+    margin: 0 0 20px;
+    font-size: 14px;
+}
+
+.category-info span {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   BRAND STATEMENT
+========================= */
+
+.statement-section {
+    display: flex;
+    min-height: 650px;
+    background: #e9e6df;
+}
+
+.statement-image {
+    width: 50%;
+    padding: 70px;
+}
+
+.statement-image img {
+    width: 100%;
+    height: 510px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.statement-text {
+    width: 50%;
+    padding: 100px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.statement-text > p:first-child {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+.statement-text h2 {
+    font-size: 65px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin: 25px 0;
+}
+
+.statement-text > p {
+    max-width: 400px;
+    line-height: 1.7;
+    color: #666;
+}
+
+.text-link {
+    margin-top: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================
+   FEATURED PRODUCTS
+========================= */
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.featured-card {
+    background: #f5f4f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.featured-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.featured-card div {
+    padding: 20px;
+}
+
+.featured-card h3 {
+    font-size: 20px;
+    margin: 0 0 8px;
+    font-weight: 500;
+}
+
+.featured-card p {
+    margin: 0;
+    color: #777;
+}
+
+
+/* =========================
+   FINAL BANNER
+========================= */
+
+.final-banner {
+    text-align: center;
+    padding: 120px 20px;
+    background: #202020;
+    color: white;
+}
+
+.final-banner p {
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.final-banner h2 {
+    font-size: 70px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin: 25px 0 40px;
+}
+
+.final-banner .shop-button {
+    background: white;
+    color: #202020;
+}
+
+.final-banner .shop-button:hover {
+    background: #ddd;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #f8f7f4;
+    padding: 60px 7% 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-brand h2 {
+    margin: 0 0 10px;
+    font-size: 25px;
+}
+
+.footer-brand p {
+    color: #777;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links a {
+    font-size: 13px;
+}
+
+.footer-links a:hover {
+    opacity: 0.5;
+}
+
+.copyright {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding-top: 25px;
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 20px;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .navbar nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        padding: 50px 20px;
+    }
+
+    .hero-text,
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 50px;
+    }
+
+    .hero-image {
+        height: 450px;
+    }
+
+    .category-grid,
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .statement-section {
+        flex-direction: column;
+    }
+
+    .statement-image,
+    .statement-text {
+        width: 100%;
+    }
+
+    .statement-image {
+        padding: 30px 20px;
+    }
+
+    .statement-text {
+        padding: 60px 20px;
+    }
+
+    .statement-text h2 {
+        font-size: 50px;
+    }
+
+    .final-banner h2 {
+        font-size: 50px;
+    }
+
+    footer {
+        padding: 50px 20px 25px;
+    }
+
+    .footer-links {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================
+   INNER PAGES
+========================= */
+
+.page-hero {
+    text-align: center;
+    padding: 120px 20px 100px;
+    background: #f8f7f4;
+}
+
+.page-hero > p:first-child {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.page-hero h1 {
+    font-size: 75px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin: 0 auto 30px;
+}
+
+.page-description {
+    max-width: 550px;
+    margin: auto;
+    color: #666;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+
+/* =========================
+   SHOP PAGE
+========================= */
+
+.shop-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 110px 8%;
+    background: white;
+}
+
+.small-title {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #777;
+}
+
+.shop-intro h2 {
+    font-size: 65px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin-top: 25px;
+}
+
+.shop-intro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.shop-intro-text p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 16px;
+    max-width: 500px;
+}
+
+
+/* FEATURES */
+
+.shop-features,
+.about-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #d8d6d1;
+}
+
+.feature-box {
+    background: #f5f4f0;
+    padding: 55px 45px;
+    min-height: 230px;
+}
+
+.feature-box span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #888;
+}
+
+.feature-box h3 {
+    font-size: 25px;
+    font-weight: 500;
+    margin: 25px 0 15px;
+}
+
+.feature-box p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+
+/* SHOP CTA */
+
+.shop-cta {
+    text-align: center;
+    padding: 120px 20px;
+    background: #e9e6df;
+}
+
+.shop-cta > p {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #777;
+}
+
+.shop-cta h2 {
+    font-size: 65px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin: 25px 0 40px;
+}
+
+
+/* =========================
+   ABOUT PAGE
+========================= */
+
+.about-section {
+    padding: 120px 8%;
+    background: white;
+}
+
+.about-text {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+.about-text h2 {
+    font-size: 65px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+    margin: 30px 0 45px;
+}
+
+.about-text > p:not(.small-title) {
+    max-width: 650px;
+    margin: 20px auto;
+    color: #666;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+
+/* =========================
+   CONTACT PAGE
+========================= */
+
+.contact-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 100px 7%;
+    background: white;
+}
+
+.contact-card {
+    background: #f5f4f0;
+    border-radius: 20px;
+    padding: 45px 35px;
+    min-height: 300px;
+}
+
+.contact-card .small-title {
+    margin-bottom: 30px;
+}
+
+.contact-card h2 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.contact-card p:not(.small-title) {
+    color: #666;
+    line-height: 1.7;
+    font-size: 14px;
+    min-height: 70px;
+}
+
+.contact-button {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    border-bottom: 1px solid #202020;
+    padding-bottom: 6px;
+}
+
+.contact-button:hover {
+    opacity: 0.5;
+}
+
+
+/* CONTACT BOTTOM */
+
+.contact-bottom {
+    text-align: center;
+    padding: 120px 20px;
+    background: #202020;
+    color: white;
+}
+
+.contact-bottom p {
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.contact-bottom h2 {
+    font-size: 70px;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   INNER PAGE MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .page-hero {
+        padding: 80px 20px;
+    }
+
+    .page-hero h1 {
+        font-size: 50px;
+    }
+
+    .shop-intro {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 70px 25px;
+    }
+
+    .shop-intro h2,
+    .about-text h2 {
+        font-size: 50px;
+    }
+
+    .shop-features,
+    .about-values,
+    .contact-section {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-cta h2,
+    .contact-bottom h2 {
+        font-size: 50px;
+    }
+
+    .contact-section {
+        padding: 60px 20px;
+    }
+}
+
+/* ================================
+   AUTOMATIC IMAGE SLIDER
+================================ */
+
+.auto-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.auto-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.auto-slider img.active {
+    display: block;
+    animation: fadeSlide 0.8s ease;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Make carousel smaller */
+.carousel {
+  max-width: 550px; /* reduce width */
+  margin-left: auto;
+}
+
+.carousel-item img {
+  height: 450px; /* was like 700px, now smaller */
+  object-fit: cover;
+  border-radius: 16px; /* to match your design */
+}
+
+/* Make hero section balanced */
+.hero-section {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Category links */
+.category-card a {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.category-card a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.category-card a {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.category-card a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.category-card {
+    outline: 3px solid red !important;
+}
